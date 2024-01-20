@@ -1,0 +1,86 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>{{ operacion }}</h1>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- /.card -->
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">{{ operacion }}</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="add()"  enctype="multipart/form-data">
+              <div *ngFor="let controlName of formControls">
+                <div class="form-group row">
+                  <label [for]="controlName">{{
+                    controlName | titlecase
+                  }}</label>
+                  <input
+                    [type]="inputType[controlName] || 'text'"
+                    class="form-control"
+                    [id]="controlName"
+                    [formControlName]="controlName"
+                  />
+                </div>               
+              </div>
+              <div class="p-field p-col-12 p-md-6">
+                <label for="imagen">Imagen:</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input
+                      type="file"
+                      (change)="handleImageUpload($event)"
+                      formControlName="imagen"
+                      class="custom-file-input"
+                    />
+                    <label class="custom-file-label">
+                      {{ form.get('imagen')?.value?.name || 'Choose file' }}
+                    </label>
+                  </div>               
+                </div>
+              </div>
+
+              <div class="row mt-2 text-center">
+                <div class="col-lg-6">
+                  <button   type="submit" class="btn btn-primary">Aceptar</button>
+                </div>
+                <div class="col-lg-6">
+                  <button
+                    routerLink="/bar"
+                    type="button"
+                    class="btn btn-secondary"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- /.card -->
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Mapa</h3>
+          </div>
+          <div class="card-body">
+            <app-map></app-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{operacion}}</h1>
+        </div> 
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12"> 
+          <!-- /.card -->
+          <!-- Horizontal Form -->
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">{{operacion}}</h3> 
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="add()">
+                <div *ngFor="let controlName of formControls">
+                  <div class="form-group row">
+                    <label [for]="controlName">{{ controlName | titlecase }}</label>
+                    <input
+                      [type]="inputType[controlName] || 'text'"
+                      class="form-control"
+                      [id]="controlName"
+                      [formControlName]="controlName"
+                    >
+                  </div>
+                </div>
+              
+                <div class="row mt-2 text-center">
+                  <div class="col-lg-6">
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                  </div>
+                  <div class="col-lg-6">
+                    <button routerLink="/usuario" type="button" class="btn btn-secondary">Cancelar</button>
+                  </div>
+                </div>
+              </form>           
+            </div>
+            
+          </div> 
+        </div>
+        <div class="card">
+      </div>     
+      </div>     
+    </div><!-- /.container-fluid -->
+  </section>

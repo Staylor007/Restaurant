@@ -1,0 +1,79 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Menu</h1>
+      </div> 
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12"> 
+        <!-- /.card -->
+        <!-- Horizontal Form -->
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Menu</h3>
+            <button class="btn btn-primary card-tools" routerLink="/add-menu">Nuevo</button>
+          </div>
+          <div class="card-body">
+
+            <p-table
+            [value]="list"
+            [paginator]="true"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }"
+            currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+            [rowsPerPageOptions]="[5, 10, 20]"
+        >
+            <ng-template pTemplate="header">
+              <tr role="row">
+                <th style="width:5%">Id</th>  
+                <th>Bar</th>  
+                <th>Nombre</th>  
+                <th>Plato</th>  
+                <th style="width:25%">Descripcion</th>  
+                <th>Precio</th>  
+                <th style="width:10%">Estado</th> 
+                <th style="width:10%">Imagen</th>   
+                <th style="width:12%">Opciones</th>  
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+              <tr  class="table-light" *ngIf="(item.id_bar == user.id_bar) || (user.tipo_usuario == 'Administrador')">
+                <td>{{item.id_menu}}</td>
+                <td>{{item.id_bar}}</td>
+                <td>{{item.nombre_menu }}</td>
+                <td>{{item.plato}}</td>
+                <td>{{item.descripcion}}</td>
+                <td>{{item.precio | currency }}</td>
+                <td>{{item.estado}}</td>  
+                <td><img *ngIf="item.foto" [src]="env + item.foto" alt="Imagen del Bar" style="max-width: 40px; max-height: 40px;"></td>  
+                <td>
+                  <button routerLink="/edit-menu/{{item.id_menu}}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
+                  <button (click)="deleteProduct(item.id_menu!)" class="btn btn-danger btn-sm ms-2"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </ng-template> 
+        </p-table>   
+          </div>
+          
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <div class="card">
+        
+        <!-- /.card-header -->
+     
+    </div>     
+    </div>     
+  </div><!-- /.container-fluid -->
+</section>
+

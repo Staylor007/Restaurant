@@ -1,0 +1,64 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{operacion}}</h1>
+        </div> 
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6"> 
+          <!-- /.card -->
+          <!-- Horizontal Form -->
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">{{operacion}}</h3> 
+            </div>
+            <div class="card-body">
+                <form  [formGroup]="form" (ngSubmit)="add()"> 
+                    <div class="form-group row">
+                        <label for="usuario">Seleccionar Usuario</label>
+                        <select class="form-control" id="usuario" formControlName="usuario" (change)="onUsuarioSelected()">
+                            <option *ngFor="let usuario of usuarios" [value]="usuario.id_usuario">{{usuario.nombre}}  {{usuario.apellido}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="foto">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" formControlName="nombre" [readonly]="true"> 
+                    </div>
+                    <div class="form-group row">
+                        <label for="foto">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" formControlName="apellido" [readonly]="true">
+                    </div>
+                    <div class="row mt-2 text-center"> 
+                        <div class="col-lg-6">
+                            <button  type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button routerLink="/empleado" type="button" class="btn btn-secondary">Cancelar</button>
+                        </div> 
+                     </div>
+                </form>       
+            </div>
+            
+          </div> 
+        </div>
+        <!-- <div class="col-md-6">           
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">Bar</h3> 
+            </div>
+            <div class="card-body">
+                   
+            </div> 
+          </div> 
+        </div> -->
+      </div>     
+      </div>     
+
+  </section>

@@ -1,0 +1,304 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Dashboard</h1>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
+
+<section class="content" *ngIf="user.tipo_usuario == 'Administrador'">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{ list.length }}</h3>
+            <p>Reservas</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-calendar"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{ bar }}<sup style="font-size: 20px"></sup></h3>
+            <p>Bar</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-home"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{ users }}</h3>
+            <p>Usuarios</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{ platosbar }}</h3>
+            <p>Platos</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-pie-graph"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+  <div class="col-md-12">
+    <p-table
+      [value]="list"
+      [paginator]="true"
+      [rows]="5"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+      [rowsPerPageOptions]="[5, 10, 20]"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Usuario</th>
+          <th>Fecha Reserva</th>
+          <th>Estado</th>
+          <th>Tiempo</th>
+          <th>Ticket</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-res>
+        <tr *ngIf="res.estado != 'Cancelado'">
+          <td>{{ res.id_reserva }}</td>
+          <td>{{ res.nombre }} {{ res.apellido }}</td>
+          <td>{{ res.fecha_reserva | date : "yyyy-MM-dd" }}</td>
+          <td>
+            <span
+              *ngIf="res.estado === 'Cancelado'"
+              class="badge badge-danger"
+              >{{ res.estado }}</span
+            >
+            <span
+              *ngIf="res.estado === 'Entregado'"
+              class="badge badge-success"
+              >{{ res.estado }}</span
+            >
+            <span
+              *ngIf="res.estado === 'Pendiente'"
+              class="badge badge-success"
+              >{{ res.estado }}</span
+            >
+          </td>
+          <td>{{ res.tiempoRestante }}</td>
+          <td>{{ res.codigo_estado }}</td>
+          <td>
+            <button
+              (click)="detalle(res.id_reserva!)"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              class="btn btn-info btn-sm ms-2"
+            >
+              Pedido
+            </button>
+            <button
+              *ngIf="res.estado === 'Pendiente'"
+              (click)="cancelar(res)"
+              class="btn btn-danger btn-sm ms-2"
+            >
+              Cancelar
+            </button>
+            <button
+              *ngIf="res.estado === 'Pendiente'"
+              (click)="entregado(res)"
+              class="btn btn-success btn-sm ms-2"
+            >
+              Entregado
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</section>
+
+<section class="content" *ngIf="user.tipo_usuario != 'Administrador'">
+  <div class="container-fluid">
+    <div class="row">
+      <section class="col-4">
+        <div class="info-box mb-3 bg-success">
+          <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Reservas</span>
+            <span class="info-box-number">{{ list.length }}</span>
+          </div>
+        </div>
+        <div class="info-box mb-3 bg-info">
+          <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Platos</span>
+            <span class="info-box-number">{{ platosbar }}</span>
+          </div>
+        </div>
+        <div class="info-box mb-3 bg-warning">
+          <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Usuarios</span>
+            <span class="info-box-number">{{ users }}</span>
+          </div>
+        </div>
+      </section>
+      <section class="col-8">
+        <p-table
+        [value]="list"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
+        [rowsPerPageOptions]="[5, 10, 20]"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Id</th>
+            <th>Usuario</th>
+            <th>Fecha Reserva</th>
+            <th>Estado</th>
+            <th>Tiempo</th>
+            <th>Ticket</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-res>
+          <tr>
+            <td>{{ res.id_reserva }}</td>
+            <td>{{ res.nombre }} {{ res.apellido }}</td>
+            <td>{{ res.fecha_reserva | date : "yyyy-MM-dd" }}</td>
+            <td>
+              <span
+                *ngIf="res.estado === 'Cancelado'"
+                class="badge badge-danger"
+                >{{ res.estado }}</span
+              >
+              <span
+                *ngIf="res.estado === 'Entregado'"
+                class="badge badge-success"
+                >{{ res.estado }}</span
+              >
+              <span
+                *ngIf="res.estado === 'Pendiente'"
+                class="badge badge-success"
+                >{{ res.estado }}</span
+              >
+            </td>
+            <td>{{ res.tiempoRestante }}</td>
+            <td>{{ res.codigo_estado }}</td>
+            <td>
+              <button
+                (click)="detalle(res.id_reserva!)"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                class="btn btn-info btn-sm ms-2"
+              >
+                Pedido
+              </button>
+              <button
+                *ngIf="res.estado === 'Pendiente'"
+                (click)="cancelar(res)"
+                class="btn btn-danger btn-sm ms-2"
+              >
+                Cancelar
+              </button>
+              <button
+                *ngIf="res.estado === 'Pendiente'"
+                (click)="entregado(res)"
+                class="btn btn-success btn-sm ms-2"
+              >
+                Entregado
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>        
+      </section>
+ 
+    </div>
+  </div> 
+</section>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Detalle del Pedido
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table
+          id="detalle"
+          class="table table-bordered table-hover dataTable dtr-inline"
+          role="grid"
+          aria-describedby="example2_info"
+        >
+          <thead>
+            <tr role="row">
+              <th>Id</th>
+              <th>Pedido</th>
+              <th>Menu</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of dat" class="table-light">
+              <td>{{ item.id_detalle_reserva }}</td>
+              <td>{{ item.plato }}</td>
+              <td>{{ item.nombre_menu }}</td>
+              <td>{{ item.cantidad }}</td>
+              <td>{{ item.precio_unitario }}$</td>
+              <td>{{ item.subtotal }}$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Perfil</h1>
+          </div> 
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="assets/icon/user.png"
+                       alt="User profile picture">
+                </div> 
+                <h3 class="profile-username text-center">{{user.usuario}}</h3> 
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Usuario</b> <a class="float-right">{{user.tipo_usuario}}</a>
+                  </li> 
+                  <li class="list-group-item">
+                    <b>Bar</b> <a class="float-right">{{user.nombre_bar}}</a>
+                  </li> 
+                </ul> 
+              </div>
+              <!-- /.card-body -->
+            </div>           
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-body">
+                <div class="tab-content"> 
+             
+                    <form class="form-horizontal" [formGroup]="form" (ngSubmit)="add()">
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="nombre">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Apellido</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="apellido">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Usuario</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="usuario">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" formControlName="correo">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Cedula</label>
+                        <div class="col-sm-10">     
+                          <input type="text" class="form-control"  formControlName="cedula">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Direccion</label>
+                        <div class="col-sm-10">     
+                          <input type="text" class="form-control"  formControlName="direccion">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Telefono</label>
+                        <div class="col-sm-10">     
+                          <input type="text" class="form-control"  formControlName="telefono">
+                        </div>
+                      </div> 
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger">Editar</button>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>

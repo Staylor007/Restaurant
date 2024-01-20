@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Log in</title>
+ 
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+  <img src="assets/icon/restaurant_Unemi-transformed.png">
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Inicia Secion</p> 
+      <form  [formGroup]="form"  (submit)="login()">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control"formControlName="username" placeholder="Username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div> 
+
+        <div class="input-group mb-3">
+          <input   [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="togglePasswordVisibility()"
+          >
+            <i
+              class="fa"
+              [ngClass]="{
+                'fa-eye': showPassword,
+                'fa-eye-slash': !showPassword
+              }"
+            ></i>
+          </button>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-8">
+             
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form> 
+      <p class="mb-1">
+        <a routerLink="/recuperar">Olvidaste la contraseña</a>
+      </p>
+      <p class="mb-0">
+        <a routerLink="/registro" class="text-center">Registro</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+ 
+</body>
+</html>

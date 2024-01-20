@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Log in</title>
+ 
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+  <img src="assets/icon/restaurant_Unemi-transformed.png">
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Inicia Secion</p> 
+
+      <form [formGroup]="form" (ngSubmit)="registerUser()">
+        <div *ngFor="let controlName of formControls">
+          <div class="input-group mb-3"> 
+            <input
+              [type]="inputType[controlName] || 'text'"
+              class="form-control"
+              [id]="controlName"
+              [formControlName]="controlName "
+              [placeholder]="controlName | titlecase"
+            >
+          </div>          
+        </div>
+        <div class="form-group">  
+          <select id="id_pais" class="form-control" formControlName="id_pais">
+            <option value="" disabled selected>--Selecciona un Pais</option>
+            <option *ngFor="let pais of paises" [value]="pais.id_pais">{{ pais.nombre_pais }}</option>
+          </select>
+        </div>
+        <div class="form-group">  
+          <select id="id_provincia" class="form-control" formControlName="id_provincia">
+            <option value="" disabled selected>--Selecciona una Provincia</option>
+            <option *ngFor="let provincia of provincias" [value]="provincia.id_provincia">{{ provincia.nombre_provincia}}</option>
+          </select>
+        </div>
+        <div class="form-group">  
+          <select id="id_ciudad" class="form-control" formControlName="id_ciudad">
+            <option value="" disabled selected>--Selecciona una Ciudad</option>
+            <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">{{ ciudad.nombre_ciudad}}</option>
+          </select>
+        </div>
+      
+        <div class="row">
+            <div class="col-8">
+               
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+            <!-- /.col -->
+        </div>     
+      </form> 
+      <p class="mb-1">
+        <a routerLink="/login">Login</a>
+      </p>
+    
+    </div> 
+  </div>
+</div> 
+</body>
+</html>

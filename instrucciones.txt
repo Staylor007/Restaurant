@@ -1,0 +1,24 @@
+ejecutar en la consola ->   npm i  ---------estos para la instalacion de dependencias
+
+
+
+ejecutar en consola -> ng serve  --->> ver en el servidor en http://localhost:4200
+
+
+revisar que el servidor este levantado el xampp
+
+ejecutal la api para conexion a base de datos
+
+
+
+
+
+
+
+
+
+
+
+
+
+npm install @angular/google-maps
